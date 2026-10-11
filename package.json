@@ -1,7 +1,7 @@
 {
-  "name": "express.schema",
+  "name": "@isomorphic.schema/express",
   "version": "1.0.0",
-  "description": "Route-based Express middleware for validating request params, bodies, and JSON responses with any parser",
+  "description": "Route-based Express middleware for validating request params, bodies, and JSON responses with Zod, JSON Schema/Ajv, or any custom parser",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jkutianski/express.schema.git"

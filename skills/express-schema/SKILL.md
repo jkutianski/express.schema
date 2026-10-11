@@ -18,7 +18,7 @@ It is validator-agnostic. Express is a peer dependency; use Zod, Ajv/JSON Schema
 ## Install and setup
 
 ```sh
-npm install express.schema express
+npm install @isomorphic.schema/express express
 npm install zod
 ```
 

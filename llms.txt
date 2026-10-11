@@ -9,7 +9,7 @@ The package does not require a schema library. Express is a peer dependency; Zod
 ## Install
 
 ```sh
-npm install express.schema express
+npm install @isomorphic.schema/express express
 ```
 
 Install a validator separately, for example `npm install zod` or `npm install ajv`.

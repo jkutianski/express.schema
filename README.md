@@ -1,4 +1,4 @@
-# [![express.schema](logo.svg)](https://github.com/jkutianski/express.schema) [![License](https://badgen.net/github/license/jkutianski/express.schema)](https://github.com/jkutianski/express.schema/blob/main/LICENSE) [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/jkutianski/express.schema/ci.yml)](https://github.com/jkutianski/express.schema/actions) ![NPM Version](https://badgen.net/npm/v/express.schema)(https://www.npmjs.com/package/express.schema)
+# [![express.schema](logo.svg)](https://github.com/jkutianski/express.schema) [![License](https://badgen.net/github/license/jkutianski/express.schema)](https://github.com/jkutianski/express.schema/blob/main/LICENSE) [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/jkutianski/express.schema/ci.yml)](https://github.com/jkutianski/express.schema/actions) [![NPM Version](https://badgen.net/npm/v/@isomorphic.schema/express)](https://www.npmjs.com/package/@isomorphic.schema/express)
 
 Route-based runtime validation middleware for Express. Define schemas by HTTP method and path, then validate captured URL parameters, request bodies, and JSON response payloads with Zod, JSON Schema/Ajv, or a custom parser.
 
@@ -7,7 +7,7 @@ The package does not depend on a particular schema library. Express is a peer de
 ## Install
 
 ```sh
-npm install express.schema express
+npm install @isomorphic.schema/express express
 ```
 
 Install the validator you want to use separately, for example `npm install zod`.
@@ -17,7 +17,7 @@ Install the validator you want to use separately, for example `npm install zod`.
 ```js
 import express from 'express';
 import { z } from 'zod';
-import { createSchemaMiddleware } from 'express.schema';
+import { createSchemaMiddleware } from '@isomorphic.schema/express';
 
 const app = express();
 app.use(express.json());
