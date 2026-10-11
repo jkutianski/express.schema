@@ -1,0 +1,61 @@
+# express.schema
+
+## Overview
+
+`express.schema` is route-based runtime validation middleware for Express. It selects schemas by HTTP method and request path, captures path and query parameters, and validates request parameters, bodies, and JSON responses using a parser supplied by the application.
+
+The package does not require a schema library. Express is a peer dependency; Zod and Ajv are optional choices for the parser.
+
+## Install
+
+```sh
+npm install express.schema express
+```
+
+Install a validator separately, for example `npm install zod` or `npm install ajv`.
+
+## Primary API
+
+```js
+createSchemaMiddleware({ routes, parse })
+```
+
+- `routes`: object keyed by `METHOD /path`; each value may define `urlParams`, `request`, and `response` schemas.
+- `parse(schema, data, context)`: synchronous or asynchronous parser. Its returned value replaces the parsed URL params, request body, or JSON response.
+- Returns an Express `RequestHandler`.
+
+## Route matching and execution
+
+- Methods are case-insensitive. Static path segments match exactly; `:name` captures one non-empty path segment.
+- Optional query patterns are supported, for example `GET /users?active=true&id=:id`. Extra query parameters are ignored.
+- Captured path and query values are strings.
+- Execution order: parse `urlParams`, parse `request`, then parse response data when the route handler calls `res.json()`.
+- Parsed URL params are exposed as `res.locals.schemaParams`. Parsed request data replaces `req.body`.
+- `response.json()` sends the parser's returned value. `response.send()` is not intercepted.
+- Put body parsing before this middleware and install it before the routes it should cover.
+- Parser errors are forwarded to Express with `next(error)`. Unmatched requests pass through unchanged.
+
+The parser context includes `phase` (`'urlParams'`, `'request'`, or `'response'`), `request`, `response`, and `params`. Use a coercing schema such as `z.coerce.number()` when transforming string-valued URL parameters.
+
+## Documentation and source
+
+- [README](README.md) — installation, usage, route matching, and API.
+- [Agent guide](docs/agent-guide.md) — middleware flow, parser contract, and development guidance.
+- [express.schema skill](skills/express-schema/SKILL.md) — integration and repository-maintenance reference.
+- [Zod example](examples/zod.js) — runnable local Express app with valid and invalid requests.
+- [JSON Schema/Ajv example](examples/json-schema.js) — runnable local app using Ajv.
+- [TypeScript example](examples/typescript_zod.ts) — declarations and parser context types.
+- [Implementation](src/index.js) — route matching and middleware behavior.
+- [Type declarations](src/index.d.ts) — public TypeScript API.
+- [Tests](test/index.test.js) — Jest unit and Express integration tests.
+- [Package metadata](package.json) — exports, dependencies, scripts, and coverage thresholds.
+
+## Validation
+
+```sh
+npm test
+npm run test:coverage
+npm run test:types
+npm run example:zod
+npm run example:json-schema
+```
